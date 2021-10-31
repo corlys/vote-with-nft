@@ -15,33 +15,30 @@ import DarkModeSwitch from '../DarkModeSwitch'
 
 const Main = ({ children }: { children: ReactNode }): JSX.Element => {
   const { account } = useEthers()
-
   return (
-    <ChakraProvider resetCSS>
-      <Flex flexDirection="column">
-        <Flex justifyContent="space-between" alignItems="center" p={4}>
-          <Stack spacing={4} isInline alignItems="center">
-            <Link>Home</Link>
-            <Link>Etherscan</Link>
-          </Stack>
-          <Stack spacing={4} isInline alignItems="center">
-            {account ? (
-              <>
-                <DarkModeSwitch />
-                <Balance />
-                {/* <Badge variant="subtle">Registered</Badge> */}
-                <Avatar />
-              </>
-            ) : (
-              <ConnectWallet />
-            )}
-          </Stack>
-        </Flex>
-        <Flex justifyContent="center" minHeight="100vh">
-          <Flex mt={8}>{children}</Flex>
-        </Flex>
+    <Flex flexDirection="column">
+      <Flex justifyContent="space-between" alignItems="center" p={4}>
+        <Stack spacing={4} isInline alignItems="center">
+          <Link>Home</Link>
+          <Link>Etherscan</Link>
+        </Stack>
+        <Stack spacing={4} isInline alignItems="center">
+          {account ? (
+            <>
+              <DarkModeSwitch />
+              <Balance />
+              <Badge variant="subtle">Registered</Badge>
+              <Avatar />
+            </>
+          ) : (
+            <ConnectWallet />
+          )}
+        </Stack>
       </Flex>
-    </ChakraProvider>
+      <Flex justifyContent="center" minHeight="100vh">
+        <Flex mt={8}>{children}</Flex>
+      </Flex>
+    </Flex>
   )
 }
 
