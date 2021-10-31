@@ -21,10 +21,7 @@ export function ConnectWallet(): JSX.Element {
 
   return (
     <>
-      <Box
-        order={[-1, null, null, 2]}
-        textAlign={['left', null, null, 'right']}
-      >
+      <Box>
         <Button colorScheme="teal" variant="outline" onClick={onOpen}>
           Connect to a wallet
         </Button>
