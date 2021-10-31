@@ -10,5 +10,12 @@ export function Balance(): JSX.Element {
   const etherBalance = useEtherBalance(account)
   const finalBalance = etherBalance ? utils.formatEther(etherBalance) : ''
 
-  return <Text>{finalBalance} ETH</Text>
+  return (
+    <Text>
+      {finalBalance
+        .toString()
+        .replace(finalBalance.toString().substring(5), '...')}{' '}
+      ETH
+    </Text>
+  )
 }

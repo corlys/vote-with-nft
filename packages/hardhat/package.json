@@ -25,6 +25,8 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
+    "@fontsource/montserrat": "^4.5.1",
+    "@fontsource/poppins": "^4.5.0",
     "@openzeppelin/contracts": "^4.3.2"
   }
 }
