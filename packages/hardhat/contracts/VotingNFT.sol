@@ -24,10 +24,10 @@ contract VotingNFT is ERC721Enumerable, ERC721URIStorage, Ownable {
     masterVote = inputMaster;
   }
 
-  function register(bytes32 signedMessage) external payable {
+  function register(bytes32 _messageHash,bytes32 _signature) external payable {
     uint256 currentSuply = totalSupply();
     require(currentSuply < maxSuply, "Max Supply Reached");
-    require(verifySigner(masterVote, signedMessage), "Not Authorized");
+    require(verifySigner(masterVote, _signature, _messageHash), "Not Authorized");
     require(balanceOf(msg.sender) == 0, "Already minted");
     _safeMint(msg.sender, currentSuply + 1);
   }
@@ -45,10 +45,11 @@ contract VotingNFT is ERC721Enumerable, ERC721URIStorage, Ownable {
 
   function verifySigner(
         address signer,
-        bytes32 signedMessage
+        bytes32 _signature,
+        bytes32 _messageHash
   ) internal pure returns (bool) {
-    (bytes32 r, bytes32 s, uint8 v) = splitSignature(signedMessage);
-    bytes32 ethSignedMessageHash = getEthSignedMessageHash(signedMessage);
+    (bytes32 r, bytes32 s, uint8 v) = splitSignature(_signature);
+    bytes32 ethSignedMessageHash = getEthSignedMessageHash(_messageHash);
     return ECDSA.recover(ethSignedMessageHash, v, r, s) == signer;
   }
 

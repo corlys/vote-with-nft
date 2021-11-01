@@ -7,11 +7,12 @@ import {
   Heading,
   Input,
   Text,
+  Stack,
 } from '@chakra-ui/react'
 import { useEthers } from '@usedapp/core'
 import { utils } from 'ethers'
 import { useReducer } from 'react'
-import { Layout } from '../components/layout/Layout'
+import Layout from '../components/layout/Layout'
 
 type StateType = {
   signature: string
@@ -146,83 +147,87 @@ function SignatureExampleIndex(): JSX.Element {
 
   return (
     <Layout>
-      <Heading as="h1" mb="12">
-        Signature Demo Page
-      </Heading>
-      <Box maxWidth="container.sm">
-        <Text fontWeight="semibold">Use your MetaMask to sign a message.</Text>
-        <Input
-          mt="6"
-          type="text"
-          placeholder="Enter Message"
-          onChange={(e) => {
-            dispatch({
-              type: 'SET_MESSAGE_TO_SIGN',
-              messageToSign: e.target.value,
-            })
-          }}
-        />
-        <Button mt="2" colorScheme="teal" onClick={sign}>
-          Sign
-        </Button>
-      </Box>
-      <Text mt="8">This is the signature: {signature}</Text>
-      <Divider my="8" />
-      <Box maxWidth="container.sm">
-        <Text fontWeight="semibold">
-          Enter an Address, Signature, and Message to verify the Message.
-        </Text>
-        <Text mt="6">Address:</Text>
-        <Input
-          mt="2"
-          type="text"
-          placeholder="Enter Address To Verify"
-          onChange={(e) => {
-            dispatch({
-              type: 'SET_ADDRESS_TO_VERIFY',
-              addressToVerify: e.target.value,
-            })
-          }}
-        />
-        <Text mt="6">Signature:</Text>
-        <Input
-          mt="2"
-          type="text"
-          placeholder="Enter Signature To Verify"
-          onChange={(e) => {
-            dispatch({
-              type: 'SET_SIGNATURE_TO_VERIFY',
-              signatureToVerify: e.target.value,
-            })
-          }}
-        />
-        <Text mt="4">Message:</Text>
-        <Input
-          mt="2"
-          type="text"
-          placeholder="Enter Message To Verify"
-          onChange={(e) => {
-            dispatch({
-              type: 'SET_MESSAGE_TO_VERIFY',
-              messageToVerify: e.target.value,
-            })
-          }}
-        />
-        <Button mt="2" colorScheme="teal" onClick={verifySignature}>
-          Verify
-        </Button>
-        {verificationSuccess ? (
-          <Alert mt="4" status="success">
-            <AlertIcon />
-            Verified!
-          </Alert>
-        ) : (
-          <Alert mt="4" status="info">
-            <AlertIcon />
-            Not Verified!
-          </Alert>
-        )}
-      </Box>
+      <Stack maxW="50vw">
+        <Heading as="h1" mb="12">
+          Signature Demo Page
+        </Heading>
+        <Box maxWidth="container.sm">
+          <Text fontWeight="semibold">
+            Use your MetaMask to sign a message.
+          </Text>
+          <Input
+            mt="6"
+            type="text"
+            placeholder="Enter Message"
+            onChange={(e) => {
+              dispatch({
+                type: 'SET_MESSAGE_TO_SIGN',
+                messageToSign: e.target.value,
+              })
+            }}
+          />
+          <Button mt="2" colorScheme="teal" onClick={sign}>
+            Sign
+          </Button>
+        </Box>
+        <Text mt="8">This is the signature: {signature}</Text>
+        <Divider my="8" />
+        <Box maxWidth="container.sm">
+          <Text fontWeight="semibold">
+            Enter an Address, Signature, and Message to verify the Message.
+          </Text>
+          <Text mt="6">Address:</Text>
+          <Input
+            mt="2"
+            type="text"
+            placeholder="Enter Address To Verify"
+            onChange={(e) => {
+              dispatch({
+                type: 'SET_ADDRESS_TO_VERIFY',
+                addressToVerify: e.target.value,
+              })
+            }}
+          />
+          <Text mt="6">Signature:</Text>
+          <Input
+            mt="2"
+            type="text"
+            placeholder="Enter Signature To Verify"
+            onChange={(e) => {
+              dispatch({
+                type: 'SET_SIGNATURE_TO_VERIFY',
+                signatureToVerify: e.target.value,
+              })
+            }}
+          />
+          <Text mt="4">Message:</Text>
+          <Input
+            mt="2"
+            type="text"
+            placeholder="Enter Message To Verify"
+            onChange={(e) => {
+              dispatch({
+                type: 'SET_MESSAGE_TO_VERIFY',
+                messageToVerify: e.target.value,
+              })
+            }}
+          />
+          <Button mt="2" colorScheme="teal" onClick={verifySignature}>
+            Verify
+          </Button>
+          {verificationSuccess ? (
+            <Alert mt="4" status="success">
+              <AlertIcon />
+              Verified!
+            </Alert>
+          ) : (
+            <Alert mt="4" status="info">
+              <AlertIcon />
+              Not Verified!
+            </Alert>
+          )}
+        </Box>
+      </Stack>
     </Layout>
   )
 }
