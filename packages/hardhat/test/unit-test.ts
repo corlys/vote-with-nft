@@ -18,27 +18,46 @@ const { expect } = chai;
 describe("Unit Test", () => {
   let tokenAddress: string, ballotAddress: string;
 
-  before("deploying the nft and the ballot contract", async () => {
-    try {
-      const [deployer] = await ethers.getSigners();
+  describe("Contract Deployment", () => {
+    it("VotingNFTContract", async () => {
+      try {
+        const [deployer] = await ethers.getSigners();
 
-      const VotingNFTFactory = new VotingNFT__factory(deployer);
-      const VotingNFTContract = await VotingNFTFactory.deploy(
-        "VoteNFT",
-        "V",
-        1000,
-        await deployer.getAddress()
-      );
-      await VotingNFTContract.deployed();
-      tokenAddress = VotingNFTContract.address;
-      const BallotFactory = new Ballot__factory(deployer);
-      const BallotContract = await BallotFactory.deploy(tokenAddress);
-      await BallotContract.deployed();
-      ballotAddress = BallotContract.address;
-      console.log(
-        `Voting address ${tokenAddress}, Ballot Address ${ballotAddress}`
-      );
-    } catch (error) {}
+        const VotingNFTFactory = new VotingNFT__factory(deployer);
+        const VotingNFTContract = await VotingNFTFactory.deploy(
+          "VoteNFT",
+          "V",
+          1000,
+          await deployer.getAddress()
+        );
+        console.log(
+          `deploying Voting NFT Contract to ${VotingNFTContract.address}`
+        );
+        await VotingNFTContract.deployed();
+        console.log(
+          `deployed Voting NFT Contract to ${VotingNFTContract.address}`
+        );
+        tokenAddress = VotingNFTContract.address;
+        expect(tokenAddress).to.have.lengthOf(42);
+      } catch (error) {
+        console.log("Error VotingNFT Deploy", error);
+      }
+    });
+
+    it("Ballot Contract", async () => {
+      try {
+        const [deployer] = await ethers.getSigners();
+        const BallotFactory = new Ballot__factory(deployer);
+        const BallotContract = await BallotFactory.deploy(tokenAddress);
+        console.log(`deploying Ballot Contract to ${BallotContract.address}`);
+        await BallotContract.deployed();
+        console.log(`deployed Ballot Contract to ${BallotContract.address}`);
+        ballotAddress = BallotContract.address;
+        expect(ballotAddress).to.have.lengthOf(42);
+      } catch (error) {
+        console.log("Error Ballot Deploy", error);
+      }
+    });
   });
 
   describe("NFT Contract Properties", () => {

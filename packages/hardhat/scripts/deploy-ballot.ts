@@ -11,7 +11,8 @@ async function main() {
   // We get the contract to deploy
   const BallotContractFactory = new Ballot__factory(deployer);
   const contract = await BallotContractFactory.deploy(
-    "0x8c119a35187c34891b2dc5b724f26d676c8cd696"
+    "0x8c119a35187c34891b2dc5b724f26d676c8cd696",
+    { gasLimit: 3000000 }
   );
 
   await contract.deployed();

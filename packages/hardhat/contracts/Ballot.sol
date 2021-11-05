@@ -6,24 +6,28 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Ballot {
+contract Ballot is Ownable {
 
   IERC721 votingToken;
 
-  struct CandidateStruct {
+  struct VotingStruct {
     uint256 candidateA;
     uint256 candidateB;
   }
 
   mapping(address => bool) hasVoted;
+  mapping(address => uint256) candidate;
 
-  CandidateStruct result;
+  bool votingTime; 
 
-  constructor(address votingTokenAddress) {
+  VotingStruct result;
+
+  constructor(IERC721 votingTokenAddress) {
     votingToken = IERC721(votingTokenAddress);
+    // require(votingToken.balanceOf(msg.sender) == 1, "Voter NFT does not exitst");
   } 
 
-  function vote(uint256 _chosen) external {
+  function vote(uint256 _chosen) votingAllowed external {
     require(votingToken.balanceOf(msg.sender) == 1, "Voter NFT does not exitst");
     require(!hasVoted[msg.sender], "Already voted");
     if(_chosen == 0) {
@@ -31,6 +35,19 @@ contract Ballot {
     } else {
       result.candidateB++;
     }
+  }
+
+  modifier votingAllowed () {
+    require(votingTime, "Ballot is closed");
+    _;
+  }
+
+  function finalize() external onlyOwner votingAllowed {
+    votingTime = false;
+  }
+
+  function open() external onlyOwner {
+    votingTime = true;
   }
 
 }

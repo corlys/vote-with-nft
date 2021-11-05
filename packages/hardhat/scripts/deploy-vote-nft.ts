@@ -7,14 +7,24 @@ import { VotingNFT__factory } from "../../frontend/types/typechain";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
-  console.log(await deployer.signMessage("test"));
+
+  // const VotingNFTContract = await ethers.getContractFactory("VotingNFT");
+
+  // const contract = await VotingNFTContract.deploy(
+  //   "VoteNFT",
+  //   "V",
+  //   1000,
+  //   await deployer.getAddress()
+  // );
+
   const VotingNFTContract = new VotingNFT__factory(deployer);
 
   const contract = await VotingNFTContract.deploy(
     "VoteNFT",
     "V",
     1000,
-    await deployer.getAddress()
+    await deployer.getAddress(),
+    { gasLimit: 3000000 }
   );
 
   await contract.deployed();

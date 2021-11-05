@@ -62,7 +62,7 @@ function createTestnetConfig(
  * @type import('hardhat/config').HardhatUserConfig
  */
 const config: HardhatUserConfig = {
-  defaultNetwork: "rinkeby",
+  defaultNetwork: "ropsten",
   solidity: {
     compilers: [
       {
