@@ -30,8 +30,10 @@ export interface BallotInterface extends ethers.utils.Interface {
     "open()": FunctionFragment;
     "owner()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
+    "result()": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "vote(uint256)": FunctionFragment;
+    "votingTime()": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "finalize", values?: undefined): string;
@@ -41,11 +43,16 @@ export interface BallotInterface extends ethers.utils.Interface {
     functionFragment: "renounceOwnership",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "result", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOwnership",
     values: [string]
   ): string;
   encodeFunctionData(functionFragment: "vote", values: [BigNumberish]): string;
+  encodeFunctionData(
+    functionFragment: "votingTime",
+    values?: undefined
+  ): string;
 
   decodeFunctionResult(functionFragment: "finalize", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "open", data: BytesLike): Result;
@@ -54,11 +61,13 @@ export interface BallotInterface extends ethers.utils.Interface {
     functionFragment: "renounceOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "result", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "vote", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "votingTime", data: BytesLike): Result;
 
   events: {
     "OwnershipTransferred(address,address)": EventFragment;
@@ -116,6 +125,12 @@ export interface Ballot extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    result(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { candidateA: BigNumber; candidateB: BigNumber }
+    >;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -125,6 +140,8 @@ export interface Ballot extends BaseContract {
       _chosen: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    votingTime(overrides?: CallOverrides): Promise<[boolean]>;
   };
 
   finalize(
@@ -141,6 +158,12 @@ export interface Ballot extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  result(
+    overrides?: CallOverrides
+  ): Promise<
+    [BigNumber, BigNumber] & { candidateA: BigNumber; candidateB: BigNumber }
+  >;
+
   transferOwnership(
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -151,6 +174,8 @@ export interface Ballot extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  votingTime(overrides?: CallOverrides): Promise<boolean>;
+
   callStatic: {
     finalize(overrides?: CallOverrides): Promise<void>;
 
@@ -160,12 +185,20 @@ export interface Ballot extends BaseContract {
 
     renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
+    result(
+      overrides?: CallOverrides
+    ): Promise<
+      [BigNumber, BigNumber] & { candidateA: BigNumber; candidateB: BigNumber }
+    >;
+
     transferOwnership(
       newOwner: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
     vote(_chosen: BigNumberish, overrides?: CallOverrides): Promise<void>;
+
+    votingTime(overrides?: CallOverrides): Promise<boolean>;
   };
 
   filters: {
@@ -194,6 +227,8 @@ export interface Ballot extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    result(overrides?: CallOverrides): Promise<BigNumber>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -203,6 +238,8 @@ export interface Ballot extends BaseContract {
       _chosen: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    votingTime(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -220,6 +257,8 @@ export interface Ballot extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    result(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -229,5 +268,7 @@ export interface Ballot extends BaseContract {
       _chosen: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    votingTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }
