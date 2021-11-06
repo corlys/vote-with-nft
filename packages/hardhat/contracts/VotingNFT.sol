@@ -23,7 +23,7 @@ contract VotingNFT is ERC721Enumerable, ERC721URIStorage, Ownable {
     maxSuply = supply;
     masterVote = inputMaster;
   }
-
+    
   function register(bytes32 _messageHash, bytes memory _signature) external payable {
     uint256 currentSuply = totalSupply();
     require(currentSuply < maxSuply, "Max Supply Reached");

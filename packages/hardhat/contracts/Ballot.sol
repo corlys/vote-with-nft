@@ -18,9 +18,9 @@ contract Ballot is Ownable {
   mapping(address => bool) hasVoted;
   mapping(address => uint256) candidate;
 
-  bool votingTime; 
+  bool public votingTime; 
 
-  VotingStruct result;
+  VotingStruct public result;
 
   constructor(IERC721 votingTokenAddress) {
     votingToken = IERC721(votingTokenAddress);
