@@ -12,9 +12,7 @@ export type { IERC721Receiver } from "./IERC721Receiver";
 export type { ERC165 } from "./ERC165";
 export type { IERC165 } from "./IERC165";
 export type { Ballot } from "./Ballot";
-export type { Multicall } from "./Multicall";
 export type { VotingNFT } from "./VotingNFT";
-export type { YourContract } from "./YourContract";
 
 export { Ownable__factory } from "./factories/Ownable__factory";
 export { ERC721__factory } from "./factories/ERC721__factory";
@@ -27,6 +25,4 @@ export { IERC721Receiver__factory } from "./factories/IERC721Receiver__factory";
 export { ERC165__factory } from "./factories/ERC165__factory";
 export { IERC165__factory } from "./factories/IERC165__factory";
 export { Ballot__factory } from "./factories/Ballot__factory";
-export { Multicall__factory } from "./factories/Multicall__factory";
 export { VotingNFT__factory } from "./factories/VotingNFT__factory";
-export { YourContract__factory } from "./factories/YourContract__factory";

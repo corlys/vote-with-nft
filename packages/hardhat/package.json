@@ -6,27 +6,31 @@
   "scripts": {
     "chain": "npx hardhat node",
     "compile": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy.ts --network localhost"
+    "deploy": "npx hardhat run scripts/deploy.ts --network localhost",
+    "deploy-vote-nft": "npx hardhat run scripts/deploy-vote-nft.ts --network ropsten",
+    "deploy-ballot": "npx hardhat run scripts/deploy-ballot.ts --network ropsten",
+    "test": "npx hardhat test",
+    "verify": "npx hardhat verify --network ropsten 0x767f97f5cF66CA10fAf5Cb9806cF81BA4Ffb2eB5 'VoteNFT' 'V' 1000 '0xB04714743e901f9a56f55D9BED9C6f6af5df2D1E'"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.7",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "@typechain/ethers-v5": "^7.0.1",
-    "@typechain/hardhat": "^2.0.2",
+    "@typechain/ethers-v5": "^8.0.1",
+    "@typechain/hardhat": "^3.0.0",
     "@types/chai": "^4.2.18",
     "@types/mocha": "^8.2.2",
     "@types/node": "^15.12.2",
     "chai": "^4.3.4",
-    "ethereum-waffle": "^3.3.0",
-    "ethers": "^5.2.0",
-    "hardhat": "^2.3.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.5.1",
+    "hardhat": "^2.6.8",
     "ts-node": "^10.0.0",
-    "typechain": "^5.0.0",
+    "typechain": "^6.0.2",
     "typescript": "^4.3.2"
   },
   "dependencies": {
-    "@fontsource/montserrat": "^4.5.1",
-    "@fontsource/poppins": "^4.5.0",
-    "@openzeppelin/contracts": "^4.3.2"
+    "@openzeppelin/contracts": "^4.3.2",
+    "dotenv": "^10.0.0"
   }
 }

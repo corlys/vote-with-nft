@@ -9,7 +9,6 @@ import type { AppProps } from 'next/app'
 import '@fontsource/poppins'
 import '@fontsource/montserrat'
 
-import { MulticallContract } from '../artifacts/contracts/contractAddress'
 import '../styles/global.css'
 import theme from '../styles/theme'
 
@@ -19,6 +18,7 @@ export const INFURA_ID = '460f40a260564ac4a4f4b3fffb032dad'
 const config: Config = {
   readOnlyUrls: {
     [ChainId.Ropsten]: `https://ropsten.infura.io/v3/${INFURA_ID}`,
+    [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${INFURA_ID}`,
     [ChainId.Hardhat]: 'http://localhost:8545',
     [ChainId.Localhost]: 'http://localhost:8545',
   },
@@ -34,8 +34,8 @@ const config: Config = {
   ],
   multicallAddresses: {
     ...MULTICALL_ADDRESSES,
-    [ChainId.Hardhat]: MulticallContract,
-    [ChainId.Localhost]: MulticallContract,
+    // [ChainId.Hardhat]: MulticallContract,
+    // [ChainId.Localhost]: MulticallContract,
   },
 }
 

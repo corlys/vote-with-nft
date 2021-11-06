@@ -1,6 +1,6 @@
 import { Heading } from '@chakra-ui/react'
 
-import Main from '../components/layout/Main'
+import Main from '../components/layout/Layout'
 
 const HomeIndex = (): JSX.Element => {
   return (
