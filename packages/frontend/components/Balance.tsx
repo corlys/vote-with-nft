@@ -1,5 +1,5 @@
 import { Text } from '@chakra-ui/react'
-import { useEtherBalance, useEthers } from '@usedapp/core'
+import { useEtherBalance, useEthers, } from '@usedapp/core'
 import { utils } from 'ethers'
 
 /**

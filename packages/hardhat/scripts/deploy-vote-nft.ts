@@ -24,7 +24,7 @@ async function main() {
     "V",
     1000,
     await deployer.getAddress(),
-    { gasLimit: 3000000 }
+    { gasLimit: 8000000 }
   );
 
   await contract.deployed();
